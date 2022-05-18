@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView, FlatList, View, Image, Text } from 'react-native';
+import { SafeAreaView, FlatList } from 'react-native';
 import PokemonShow from '../../componentes/PokemonShow';
 
-export default function App () {
+export default function Pokelist() {
 
   const [pokemons, setPokemons] = useState([])
 
