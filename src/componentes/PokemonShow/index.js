@@ -1,20 +1,36 @@
 import React from 'react';
-import { View , Image, Text, TouchableOpacity } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {View, Image, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
-export default function PokemonShow(props) {
-    //{"index": 9, "item": {"name": "caterpie", "url": "https://pokeapi.co/api/v2/pokemon/10/"}, "separators": {"highlight": [Function highlight], "unhighlight": [Function unhighlight], "updateProps": [Function updateProps]}}
+export default function PokemonShow({pokemonName, pokemonUrl}) {
+  const navigation = useNavigation();
 
-    const { name, url } = props.item
-    const pokemonNumber = url.replace('https://pokeapi.co/api/v2/pokemon/', '').replace('/', '')
-  
-    const imageUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-ii/crystal/'+pokemonNumber+'.png'
-     return (
-      <View style={{ flexDirection: 'row' }}> 
-        <TouchableOpacity>
-        <Image style={{width: 60, height: 60}} source={{ uri: imageUrl }}/> 
-        </TouchableOpacity>
-        <Text>{name}</Text> 
+  const pokemonNumber = pokemonUrl
+    .replace('https://pokeapi.co/api/v2/pokemon/', '')
+    .replace('/', '');
+
+  const imageUrl =
+    'https://veekun.com/dex/media/pokemon/main-sprites/black-white/' +
+    pokemonNumber +
+    '.png';
+
+  return (
+    <View style={{flexDirection: 'row'}}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Detalhes', {urlparam: pokemonUrl})}>
+        <Image style={estilos.imagem} source={{uri: imageUrl}} />
+      </TouchableOpacity>
+      <View>
+        <Text>Selecione seu Pokemon</Text>
       </View>
-    )
-  }
-  
+    </View>
+  );
+}
+
+const estilos = StyleSheet.create({
+  imagem: {
+    width: 90,
+    height: 90,
+    borderRadius: 6,
+  },
+});
